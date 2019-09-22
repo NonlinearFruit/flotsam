@@ -5,5 +5,5 @@ import java.util.List;
 public interface AllDatLogic {
     void startContraction();
     void missedContraction();
-    List<Integer> getContrcationIntervals();
+    List<Long> getContrcationIntervals();
 }
