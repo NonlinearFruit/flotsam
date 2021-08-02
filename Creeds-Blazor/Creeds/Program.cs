@@ -1,22 +1,11 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+using Creeds;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Creeds
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+var bootstrapper = new Bootstrapper(new Configuration
 {
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
-
-            builder.Services.AddScoped(
-                sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
-
-            await builder.Build().RunAsync();
-        }
-    }
-}
+    BaseAddress = builder.HostEnvironment.BaseAddress
+});
+bootstrapper.ConfigureServices(builder.Services);
+bootstrapper.Configure(builder);
+await builder.Build().RunAsync();
