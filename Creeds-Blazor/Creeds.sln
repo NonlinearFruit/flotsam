@@ -4,6 +4,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creeds", "Creeds\Creeds.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creeds.Tests", "Creeds.Tests\Creeds.Tests.csproj", "{610566B1-8DAA-4A6C-83DA-E4D72CB0180C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Miscellanious", "Miscellanious", "{78CA6C83-0708-4762-A537-7F60FCF914D0}"
+ProjectSection(SolutionItems) = preProject
+	update_creed_files.sh = update_creed_files.sh
+	.gitignore = .gitignore
+	.github\workflows\master.yml = .github\workflows\master.yml
+	update_main_database.sh = update_main_database.sh
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

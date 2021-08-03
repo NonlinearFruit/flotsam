@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using Creeds.Data;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +17,7 @@ namespace Creeds
 
         public IServiceCollection ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IDatabase, Database>();
             services.AddTransient<IJsonLoader, JsonLoader>();
             services.AddScoped(_ => new HttpClient
                 {
