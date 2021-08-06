@@ -1,8 +1,14 @@
 ﻿@page "/"
+@using Creeds.Data
+@inject IDatabase Database
 
 <h1>Welcome to Creeds!</h1>
 
-Read, search, copy classic creeds.
+<ListView Items="@Database.Creeds.Where(c => c.Url.StartsWith("Creed")).OrderBy(c => c.Year)" Render="true">
+    <ItemTemplate>
+        <a href="@context.Url"><li style="list-style:none">@context.Title :: @context.Year</li></a>
+    </ItemTemplate>
+</ListView>
 <br/>
 <a href="https://github.com/NonlinearFruit/Creeds-Blazor">GitHub</a>
 <br/>

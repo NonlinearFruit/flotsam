@@ -37,12 +37,12 @@ else
     {
         if (string.IsNullOrEmpty(CreedFile) || !IsValidCreed(CreedFile))
             return;
-        _summary = Database.Creeds.First(c => c.FileName == $"{CreedFile}.json");
-        _document = await Loader.LoadAsync<Document<Creed>>($"creeds/{_summary.FileName}");
+        _summary = Database.Creeds.First(c => c.FileName == CreedFile);
+        _document = await Loader.LoadAsync<Document<Creed>>($"creeds/{_summary.FileName}.json");
     }
 
     private bool IsValidCreed(string creedFile)
     {
-        return Database.Creeds.Any(c => c.FileName == $"{creedFile}.json");
+        return Database.Creeds.Any(c => c.FileName == creedFile);
     }
 }
