@@ -23,14 +23,14 @@ else
     }
     else
     {
-        <p>@_document.Data.Content</p>
+        <p style="white-space: pre">@_document.Data.Content</p>
     }
 }
 
 @code {
     [Parameter]
     public string CreedFile { get; set; }
-    private CreedSummary _summary;
+    private Summary _summary;
     private Document<Creed> _document;
 
     protected override async Task OnInitializedAsync()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
   public class Database : IDatabase {
 
-  public ICollection<CreedSummary> Creeds { get; } = new List<CreedSummary> {
+  public ICollection<Summary> Creeds { get; } = new List<Summary> {
 new ("Abstract of Principles", 1858, "Public Domain", "abstract_of_principles", "CanonPage/abstract_of_principles"),
 new ("Apostles' Creed", 710, "Public Domain", "apostles_creed", "CreedPage/apostles_creed"),
 new ("Athanasian Creed", 800, "Public Domain", "athanasian_creed", "CreedPage/athanasian_creed"),

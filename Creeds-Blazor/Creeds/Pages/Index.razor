@@ -4,7 +4,7 @@
 
 <h1>Welcome to Creeds!</h1>
 
-<ListView Items="@Database.Creeds.Where(c => c.Url.StartsWith("Creed")).OrderBy(c => c.Year)" Render="true">
+<ListView Items="@Database.Creeds.Where(c => c.Url.StartsWith("Creed") || c.Url.StartsWith("Catechism") || c.Url.StartsWith("Canon")).OrderBy(c => c.Year)" Render="true">
     <ItemTemplate>
         <a href="@context.Url"><li style="list-style:none">@context.Title :: @context.Year</li></a>
     </ItemTemplate>

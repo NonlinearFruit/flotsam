@@ -4,6 +4,6 @@ namespace Creeds.Data
 {
     public interface IDatabase
     {
-        public ICollection<CreedSummary> Creeds { get; }
+        public ICollection<Summary> Creeds { get; }
     }
 }
