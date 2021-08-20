@@ -1,6 +1,5 @@
 ﻿@page "/ConfessionPage/{ConfessionFile}"
 @using Creeds.Data
-@inject IJsonLoader Loader
 @inject IDatabase Database
 
 @if (_summary == null)
@@ -48,14 +47,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrEmpty(ConfessionFile) || !IsValidCreed(ConfessionFile))
-            return;
-        _summary = Database.Creeds.First(c => c.FileName == ConfessionFile);
-        _document = await Loader.LoadAsync<Document<ICollection<ChapterItem>>>($"creeds/{_summary.FileName}.json");
-    }
-
-    private bool IsValidCreed(string creedFile)
-    {
-        return Database.Creeds.Any(c => c.FileName == creedFile);
+        _summary = Database.GetSummary(ConfessionFile);
+        _document = await Database.LoadDocumentAsync<ICollection<ChapterItem>>(_summary);
     }
 }

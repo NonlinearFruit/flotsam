@@ -1,7 +1,25 @@
 file="Creeds/Data/Database.cs"
 jsons="Creeds/wwwroot/creeds/"
 
-echo -e "using System.Collections.Generic;\n\n  namespace Creeds.Data {\n\n  public class Database : IDatabase {\n\n  public ICollection<CreedSummary> Creeds { get; } = new List<CreedSummary> {" > $file;
+cat > $file << END
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Creeds.Data
+{
+    public class Database : IDatabase
+    {
+        private readonly IJsonLoader _loader;
+
+        public Database(IJsonLoader loader)
+        {
+            _loader = loader;
+        }
+
+        public ICollection<Summary> Creeds { get; set; } = new List<Summary>
+        {
+END
 
 for json in $(ls $jsons); do
   filename=$(basename -s .json $json)
@@ -10,4 +28,14 @@ done;
 
 sed -i '$ s/.$//' $file;
 
-echo -e "}; } }" >> $file;
+cat >> $file << END
+        };
+
+        public Summary GetSummary(string filename) => Creeds.FirstOrDefault(c => c.FileName == filename);
+
+        public async Task<Document<T>> LoadDocumentAsync<T>(Summary summary) => Creeds.Any(c => c == summary)
+            ? await _loader.LoadAsync<Document<T>>($"creeds/{Creeds.First(c => c == summary).FileName}.json")
+            : null;
+    }
+}
+END

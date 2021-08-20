@@ -1,6 +1,5 @@
 ﻿@page "/CatechismPage/{CatechismFile}"
 @using Creeds.Data
-@inject IJsonLoader Loader
 @inject IDatabase Database
 
 @if (_summary == null)
@@ -41,14 +40,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrEmpty(CatechismFile) || !IsValidCreed(CatechismFile))
-            return;
-        _summary = Database.Creeds.First(c => c.FileName == CatechismFile);
-        _document = await Loader.LoadAsync<Document<ICollection<Catechism>>>($"creeds/{_summary.FileName}.json");
-    }
-
-    private bool IsValidCreed(string creedFile)
-    {
-        return Database.Creeds.Any(c => c.FileName == creedFile);
+        _summary = Database.GetSummary(CatechismFile);
+        _document = await Database.LoadDocumentAsync<ICollection<Catechism>>(_summary);
     }
 }

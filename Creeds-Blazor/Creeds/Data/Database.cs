@@ -1,10 +1,20 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-  namespace Creeds.Data {
+namespace Creeds.Data
+{
+    public class Database : IDatabase
+    {
+        private readonly IJsonLoader _loader;
 
-  public class Database : IDatabase {
+        public Database(IJsonLoader loader)
+        {
+            _loader = loader;
+        }
 
-  public ICollection<Summary> Creeds { get; } = new List<Summary> {
+        public ICollection<Summary> Creeds { get; set; } = new List<Summary>
+        {
 new ("Abstract of Principles", 1858, "Public Domain", "abstract_of_principles", "CanonPage/abstract_of_principles"),
 new ("Apostles' Creed", 710, "Public Domain", "apostles_creed", "CreedPage/apostles_creed"),
 new ("Athanasian Creed", 800, "Public Domain", "athanasian_creed", "CreedPage/athanasian_creed"),
@@ -41,4 +51,12 @@ new ("Westminster Larger Catechism", 1647, "Public Domain", "westminster_larger_
 new ("Westminster Shorter Catechism", 1647, "Public Domain", "westminster_shorter_catechism", "CatechismPage/westminster_shorter_catechism"),
 new ("Zwingli's 67 Articles", 1523, "Public Domain", "zwinglis_67_articles", "CanonPage/zwinglis_67_articles"),
 new ("Zwingli's Fidei Ratio", 1530, "Public Domain - Translated by Thomas Cotsforde (1555)", "zwinglis_fidei_ratio", "CanonPage/zwinglis_fidei_ratio")
-}; } }
+        };
+
+        public Summary GetSummary(string filename) => Creeds.FirstOrDefault(c => c.FileName == filename);
+
+        public async Task<Document<T>> LoadDocumentAsync<T>(Summary summary) => Creeds.Any(c => c == summary)
+            ? await _loader.LoadAsync<Document<T>>($"creeds/{Creeds.First(c => c == summary).FileName}.json")
+            : null;
+    }
+}
