@@ -23,7 +23,7 @@ else
     }
     else
     {
-        <ListView Items="@_document.Data" Render="true">
+        <ListView Items="@_document.Data">
             <ItemTemplate>
                 <li value="@context.Number">
                     <p style="white-space: pre">@context.Question<br>@context.Answer</p>

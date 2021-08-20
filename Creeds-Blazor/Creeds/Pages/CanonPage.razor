@@ -23,7 +23,7 @@ else
     }
     else
     {
-        <ListView Items="@_document.Data" Render="true">
+        <ListView Items="@_document.Data">
             <ItemTemplate>
                 <li value="@context.Article">
                     <p style="word-break: break-word; white-space: normal;">@context.Title<br>@context.Content</p>

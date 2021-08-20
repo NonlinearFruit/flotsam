@@ -1,36 +1,27 @@
 @typeparam TItem
 
-<ConditionalDisplay Show="@Render">
-    @HeaderTitle
+@HeaderTitle
 
-    @if (IsOrdered)
-    {
-        <ul>
-            @foreach (var item in Items)
-            {
-                <ItemTemplate>
-                    @ItemTemplate(item)
-                </ItemTemplate>
-            }
-        </ul>
-    }
-    else
-    {
-        <ol>
-            @foreach (var item in Items)
-            {
-                <ItemTemplate>
-                    @ItemTemplate(item)
-                </ItemTemplate>
-            }
-        </ol>
-    }
-</ConditionalDisplay>
+@if (IsOrdered)
+{
+    <ul>
+        @foreach (var item in Items)
+        {
+            @ItemTemplate(item)
+        }
+    </ul>
+}
+else
+{
+    <ol>
+        @foreach (var item in Items)
+        {
+            @ItemTemplate(item)
+        }
+    </ol>
+}
 
 @code {
-
-    [Parameter]
-    public bool Render { get; set; }
 
     [Parameter]
     public RenderFragment HeaderTitle { get; set; }
@@ -43,4 +34,5 @@
 
     [Parameter]
     public bool IsOrdered { get; set; }
+
 }
