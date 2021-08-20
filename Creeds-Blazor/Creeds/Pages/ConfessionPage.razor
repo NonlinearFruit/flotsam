@@ -1,58 +1,61 @@
-﻿@inject HttpClient Http
+﻿@page "/ConfessionPage/{ConfessionFile}"
+@using Creeds.Data
 @inject IJsonLoader Loader
+@inject IDatabase Database
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-@if (_forecasts == null)
+@if (_summary == null)
 {
+    <h1>Oh no!</h1>
     <p>
-        <em>Loading...</em>
+        <em>We did not find a catechism called '@ConfessionFile'</em>
     </p>
 }
 else
 {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var forecast in _forecasts)
-        {
-            <tr>
-                <td>@forecast.Date.ToShortDateString()</td>
-                <td>@forecast.TemperatureC</td>
-                <td>@forecast.TemperatureF</td>
-                <td>@forecast.Summary</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <h1>@_summary.Title</h1>
+
+    <p>@_summary.SourceAttribution</p>
+
+    <p>@_summary.Year</p>
+    if (_document == null)
+    {
+        <p>We couldn't load @_summary.Title</p>
+    }
+    else
+    {
+        <ListView Items="@_document.Data">
+            <ItemTemplate>
+                <li value="@context.Chapter">
+                    <p style="white-space: pre">@context.Title</p>
+                    <ListView Items="@context.Sections">
+                        <ItemTemplate Context="section">
+                            <li value="@section.Section">
+                                <p style="white-space: pre">@section.Content</p>
+                            </li>
+                        </ItemTemplate>
+                    </ListView>
+                </li>
+            </ItemTemplate>
+        </ListView>
+    }
 }
 
 @code {
-    private WeatherForecast[] _forecasts;
+    [Parameter]
+    public string ConfessionFile { get; set; }
+    private Summary _summary;
+    private Document<ICollection<ChapterItem>> _document;
 
     protected override async Task OnInitializedAsync()
     {
-        _forecasts = await Loader.LoadAsync<WeatherForecast[]>("sample-data/weather.json");
+        if (string.IsNullOrEmpty(ConfessionFile) || !IsValidCreed(ConfessionFile))
+            return;
+        _summary = Database.Creeds.First(c => c.FileName == ConfessionFile);
+        _document = await Loader.LoadAsync<Document<ICollection<ChapterItem>>>($"creeds/{_summary.FileName}.json");
     }
 
-    public class WeatherForecast
+    private bool IsValidCreed(string creedFile)
     {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int) (TemperatureC / 0.5556);
+        return Database.Creeds.Any(c => c.FileName == creedFile);
     }
-
 }
