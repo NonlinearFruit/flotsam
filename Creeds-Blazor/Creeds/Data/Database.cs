@@ -37,7 +37,7 @@ new ("Heidelberg Catechism", 1563, "Public Domain", "heidelberg_catechism", "Cat
 new ("Helvetic Consensus", 1675, "Translation Copyright 1990 - Martin Klauber", "helvetic_consensus", "CanonPage/helvetic_consensus"),
 new ("Ignatius' Creed", 110, "Public Domain", "ignatius_creed", "CreedPage/ignatius_creed"),
 new ("Irenaeus' Rule of Faith", 180, "Public Domain", "irenaeus_rule_of_faith", "CreedPage/irenaeus_rule_of_faith"),
-new ("Keach's Catechism", 1693, "Public Domain", "keachs_catechism", "CatechismPage/keachs_catechism"),
+new ("Keach's Catechism", 1794, "Public Domain", "keachs_catechism", "CatechismPage/keachs_catechism"),
 new ("1689 London Baptist Confession", 1677, "Public Domain", "london_baptist_1689", "ConfessionPage/london_baptist_1689"),
 new ("Matthew Henry's Scripture Catechism", 1703, "Public Domain", "matthew_henrys_scripture_catechism", "HenrysCatechismPage/matthew_henrys_scripture_catechism"),
 new ("Nicene Creed", 381, "Public Domain", "nicene_creed", "CreedPage/nicene_creed"),
