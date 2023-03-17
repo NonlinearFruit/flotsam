@@ -38,6 +38,8 @@ jobs:
     - name: Compile
       run: clj -M -m cljs.main --optimizations advanced -c hello-world.core
 
+    - name: Copy out index.html
+      run: cp *.html out/
     - name: Setup Pages
       uses: actions/configure-pages@v3
     - name: Upload artifact
