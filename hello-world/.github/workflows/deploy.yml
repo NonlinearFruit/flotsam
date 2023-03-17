@@ -18,6 +18,6 @@ jobs:
     - name: Chmod
       run: chmod +x linux-install-1.11.1.1257.sh
     - name: Install
-      run: ./linux-install-1.11.1.1257.sh
+      run: sudo ./linux-install-1.11.1.1257.sh
     - name: Compile
       run: clj -M -m cljs.main --optimizations advanced -c hello-world.core
