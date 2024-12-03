@@ -1,7 +1,7 @@
 const input_file = "day-1-historian-hysteria/input"
 
 export def "part 1" [] {
-  open day-1-historian-hysteria/input
+  open $input_file
   | parse '{list_a}   {list_b}'
   | update list_a { into int }
   | update list_b { into int }
@@ -15,12 +15,8 @@ export def "part 1" [] {
   | math sum
 }
 
-export def "part 1 debug" [] {
-  open $input_file
-}
-
 export def "part 2" [] {
-  open day-1-historian-hysteria/input
+  open $input_file
   | parse '{list_a}   {list_b}'
   | update list_a { into int }
   | update list_b { into int }
@@ -32,8 +28,4 @@ export def "part 2" [] {
     }
   } $in
   | math sum
-}
-
-export def "part 2 debug" [] {
-  open $input_file
 }

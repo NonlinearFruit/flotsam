@@ -94,8 +94,7 @@ export def "pull puzzle" [day?:string] {
     | $'($folder)-($in)'
     | mv $folder $in
 
-    $'use assert
-const input_file = "(find folder $day)/input"
+    $'const input_file = "(find folder $day)/input"
 
 export def "part 1" [] {
   open $input_file
@@ -111,11 +110,6 @@ export def "part 2" [] {
 
 export def "part 2 debug" [] {
   open $input_file
-}
-
-#[test]
-def test [] {
-  
 }'
     | save $"(find folder $day)/mod.nu"
   }
