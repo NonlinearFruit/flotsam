@@ -3,12 +3,12 @@
 
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/NonlinearFruit/advent-of-code-2024/master)](https://github.com/NonlinearFruit/advent-of-code-2024/commits/master/)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/NonlinearFruit/advent-of-code-2024/test.yml?label=tests)](https://github.com/NonlinearFruit/advent-of-code-2024/actions/workflows/test.yml)
-![star count](https://img.shields.io/badge/stars-1-yellow)
+![star count](https://img.shields.io/badge/stars-2-yellow)
 ![test count](https://img.shields.io/badge/tests-0-blue)
 
 ```
 
-       .--'~ ~ ~|        .-' *       \  /     '-.   1 *
+       .--'~ ~ ~|        .-' *       \  /     '-.   1 **
     .--'        |        |                      |   2 
 .---'           |        |                      |   3 
                                                     4
