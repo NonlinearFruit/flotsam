@@ -242,3 +242,9 @@ Input/output types:
 
 ## Nushell v0.100.0: Lessons Learned
 
+- On day 2, when piping into an `if`, could not call a defined function in the `else` clause. The error was something like `variable not defined` but the stacktrace was a couple functions higher than the `else` clause
+
+# Links
+
+- [Awesome Advent of Code](https://github.com/Bogdanp/awesome-advent-of-code) 
+- [Reference when blocked](https://github.com/jromero132/advent-of-code) 
