@@ -2,28 +2,9 @@ def --wrapped main [...rest] {
   nu -c $'use toolkit.nu; toolkit ($rest | str join " ")'
 }
 
-# Runs all the unit tests for a single day
-export def "test day" [day:string] {
- false
-}
-
-# Debugs the given day
-export def "debug day" [day:string] {
-  let folder = (find folder $day)
-  let part = (find part $day)
-  nu -c $'use ($folder); ($folder) part ($part) debug'
-}
-
-# Runs all the unit tests
-export def test [] {
- "Figure this out"
-}
-
 # Download the puzzle input and description
-export def "pull puzzle" [day?:string] {
-  if day == null {
-    mut day = date now | format date "%d"
-  }
+export def "pull puzzle" [day:int] {
+  mut day = $day | fill --alignment right --character '0' --width 2
   let year = date now | format date %Y
   let folder = find folder $day | default $"day-($day)"
   if ($folder | path exists) {
@@ -65,20 +46,16 @@ export def "part 2 debug" [] {
 }
 
 # Submit an answer to a puzzle
-export def "submit answer" [day?:string] {
-  if day == null {
-    mut day = date now | format date "%d"
-  }
+export def "submit answer" [day:int] {
+  mut day = $day | fill --alignment right --character '0' --width 2
   let year = date now | format date %Y
   let part = (find part $day)
   aoc -y $year -d $day submit $part (run puzzle $day)
 }
 
 # Run a puzzle solver
-export def "run puzzle" [day?:string] {
-  if day == null {
-    mut day = date now | format date "%d"
-  }
+export def "run puzzle" [day:int] {
+  mut day = $day | fill --alignment right --character '0' --width 2
   let folder = (find folder $day)
   let part = (find part $day)
   nu -c $"use ($folder); ($folder) part ($part)"

@@ -21,7 +21,7 @@
        |        |        |        |    |        |  10 
        |        |        |        |    |        |  11 
        |        |        |        |    |        |  12 
-                                                   13
+       |        |        |        |    |        |  13 
                                                    14
                                                    15
                                                    16
@@ -49,34 +49,6 @@ vim ~/.adventofcode.session # https://github.com/scarvalhojr/aoc-cli?tab=readme-
 
 <details>
 <summary>
-nu -c 'use toolkit.nu; toolkit debug day'
-</summary>
-
-```
-Debugs the given day
-
-Usage:
-  > debug day <day> 
-
-Flags:
-  -h, --help: Display the help message for this command
-
-Parameters:
-  day <string>
-
-Input/output types:
-  ╭───┬───────┬────────╮
-  │ # │ input │ output │
-  ├───┼───────┼────────┤
-  │ 0 │ any   │ any    │
-  ╰───┴───────┴────────╯
-
-
-```
-</details>
-
-<details>
-<summary>
 nu -c 'use toolkit.nu; toolkit pull puzzle'
 </summary>
 
@@ -84,13 +56,13 @@ nu -c 'use toolkit.nu; toolkit pull puzzle'
 Download the puzzle input and description
 
 Usage:
-  > pull puzzle (day) 
+  > pull puzzle <day> 
 
 Flags:
   -h, --help: Display the help message for this command
 
 Parameters:
-  day <string>:  (optional)
+  day <int>
 
 Input/output types:
   ╭───┬───────┬────────╮
@@ -112,13 +84,13 @@ nu -c 'use toolkit.nu; toolkit run puzzle'
 Run a puzzle solver
 
 Usage:
-  > run puzzle (day) 
+  > run puzzle <day> 
 
 Flags:
   -h, --help: Display the help message for this command
 
 Parameters:
-  day <string>:  (optional)
+  day <int>
 
 Input/output types:
   ╭───┬───────┬────────╮
@@ -140,69 +112,13 @@ nu -c 'use toolkit.nu; toolkit submit answer'
 Submit an answer to a puzzle
 
 Usage:
-  > submit answer (day) 
+  > submit answer <day> 
 
 Flags:
   -h, --help: Display the help message for this command
 
 Parameters:
-  day <string>:  (optional)
-
-Input/output types:
-  ╭───┬───────┬────────╮
-  │ # │ input │ output │
-  ├───┼───────┼────────┤
-  │ 0 │ any   │ any    │
-  ╰───┴───────┴────────╯
-
-
-```
-</details>
-
-<details>
-<summary>
-nu -c 'use toolkit.nu; toolkit test'
-</summary>
-
-```
-Runs all the unit tests
-
-Usage:
-  > test 
-
-Subcommands:
-  test day (custom) - Runs all the unit tests for a single day
-
-Flags:
-  -h, --help: Display the help message for this command
-
-Input/output types:
-  ╭───┬───────┬────────╮
-  │ # │ input │ output │
-  ├───┼───────┼────────┤
-  │ 0 │ any   │ any    │
-  ╰───┴───────┴────────╯
-
-
-```
-</details>
-
-<details>
-<summary>
-nu -c 'use toolkit.nu; toolkit test day'
-</summary>
-
-```
-Runs all the unit tests for a single day
-
-Usage:
-  > test day <day> 
-
-Flags:
-  -h, --help: Display the help message for this command
-
-Parameters:
-  day <string>
+  day <int>
 
 Input/output types:
   ╭───┬───────┬────────╮
