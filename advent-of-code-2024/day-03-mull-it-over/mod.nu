@@ -1,4 +1,4 @@
-const input_file = "day-3-mull-it-over/input"
+const input_file = "day-03-mull-it-over/input"
 
 export def "part 1" [] {
   open $input_file

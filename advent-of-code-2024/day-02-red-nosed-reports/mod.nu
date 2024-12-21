@@ -1,4 +1,4 @@
-const input_file = "day-2-red-nosed-reports/input"
+const input_file = "day-02-red-nosed-reports/input"
 
 export def "part 1" [] {
   open $input_file
