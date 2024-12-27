@@ -3,7 +3,7 @@
 
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/NonlinearFruit/advent-of-code-2024/master)](https://github.com/NonlinearFruit/advent-of-code-2024/commits/master/)
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/NonlinearFruit/advent-of-code-2024/test.yml?label=tests)](https://github.com/NonlinearFruit/advent-of-code-2024/actions/workflows/test.yml)
-![star count](https://img.shields.io/badge/stars-6-yellow)
+![star count](https://img.shields.io/badge/stars-8-yellow)
 ![test count](https://img.shields.io/badge/tests-0-blue)
 
 ```
@@ -12,7 +12,7 @@
        .--'~ ~ ~|        .-' *       \  /     '-.   1 **
     .--'~  ,* ~ |        |  >o<   \_\_\|_/__/   |   2 **
 .---': ~ '(~), ~|        | >@>O< o-_/.()__------|   3 **
-|               |        |                      |   4 
+|@..#'. ~ " ' ~ |        |>O>o<@< \____       .'|   4 **
 |               |        |          ..          |   5 
 |               |        |        .'  '.        |   6 
 |               |        |        |    |        |   7 
@@ -22,18 +22,19 @@
        |        |        |        |    |        |  11 
        |        |        |        |    |        |  12 
        |        |        |        |    |        |  13 
-                                                   14
-                                                   15
-                                                   16
-                                                   17
-                                                   18
-                                                   19
-                                                   20
-                                                   21
-                                                   22
-                                                   23
-                                                   24
-                                                   25
+       |        |        |        |    |        |  14 
+       |        |        |        |    |        |  15 
+       |        |        |        |    |        |  16 
+       |        |        |        |    |        |  17 
+       |        |        |        |    |        |  18 
+       |        |        |        |    |        |  19 
+       |        |        |        '.  .'        |  20 
+.------'        '------. |          ''          |  21 
+|                      | |                      |  22 
+|                      | |                      |  23 
+|                      | |                      |  24 
+|                      | '-.                  .-'  25 
+'----------------------'   '------------------'         
 
 ```
 
