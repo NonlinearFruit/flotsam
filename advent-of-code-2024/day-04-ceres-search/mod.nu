@@ -36,62 +36,56 @@ export def "part 2" [] {
   | where column != ($maxColumn - 1)
 
   $aIndices
-  | where {
-    [
-      (north-x-mas $grid $in)
-      (south-x-mas $grid $in)
-      (west-x-mas $grid $in)
-      (east-x-mas $grid $in)
-    ]
-    | any { $in }
+  | par-each {|index|
+    let nw = $grid | at-index ($index.row - 1) ($index.column - 1)
+    let ne = $grid | at-index ($index.row - 1) ($index.column + 1)
+    let sw = $grid | at-index ($index.row + 1) ($index.column - 1)
+    let se = $grid | at-index ($index.row + 1) ($index.column + 1)
+    (
+      (north-x-mas $nw $ne $sw $se)
+      or (south-x-mas $nw $ne $sw $se)
+      or (west-x-mas $nw $ne $sw $se)
+      or (east-x-mas $nw $ne $sw $se)
+    )
   }
+  | where $it
   | length
 }
 
-def is-an-a [grid index] {
-  $grid
-  | at-index $index.row $index.column
-  | $in == 'A'
+def north-x-mas [nw ne sw se] {
+  (
+    ($nw == 'M')
+    and ($ne == 'M')
+    and ($sw == 'S')
+    and ($se == 'S')
+  )
 }
 
-def north-x-mas [grid index] {
-  [
-    ($grid | at-index ($index.row - 1) ($index.column - 1) | $in == 'M')
-    ($grid | at-index ($index.row - 1) ($index.column + 1) | $in == 'M')
-    ($grid | at-index ($index.row + 1) ($index.column - 1) | $in == 'S')
-    ($grid | at-index ($index.row + 1) ($index.column + 1) | $in == 'S')
-  ]
-  | all { $in }
+def south-x-mas [nw ne sw se] {
+  (
+    ($nw == 'S')
+    and ($ne == 'S')
+    and ($sw == 'M')
+    and ($se == 'M')
+  )
 }
 
-def south-x-mas [grid index] {
-  [
-    ($grid | at-index ($index.row - 1) ($index.column - 1) | $in == 'S')
-    ($grid | at-index ($index.row - 1) ($index.column + 1) | $in == 'S')
-    ($grid | at-index ($index.row + 1) ($index.column - 1) | $in == 'M')
-    ($grid | at-index ($index.row + 1) ($index.column + 1) | $in == 'M')
-  ]
-  | all { $in }
+def west-x-mas [nw ne sw se] {
+  (
+    ($nw == 'M')
+    and ($ne == 'S')
+    and ($sw == 'M')
+    and ($se == 'S')
+  )
 }
 
-def west-x-mas [grid index] {
-  [
-    ($grid | at-index ($index.row - 1) ($index.column - 1) | $in == 'M')
-    ($grid | at-index ($index.row - 1) ($index.column + 1) | $in == 'S')
-    ($grid | at-index ($index.row + 1) ($index.column - 1) | $in == 'M')
-    ($grid | at-index ($index.row + 1) ($index.column + 1) | $in == 'S')
-  ]
-  | all { $in }
-}
-
-def east-x-mas [grid index] {
-  [
-    ($grid | at-index ($index.row - 1) ($index.column - 1) | $in == 'S')
-    ($grid | at-index ($index.row - 1) ($index.column + 1) | $in == 'M')
-    ($grid | at-index ($index.row + 1) ($index.column - 1) | $in == 'S')
-    ($grid | at-index ($index.row + 1) ($index.column + 1) | $in == 'M')
-  ]
-  | all { $in }
+def east-x-mas [nw ne sw se] {
+  (
+    ($nw == 'S')
+    and ($ne == 'M')
+    and ($sw == 'S')
+    and ($se == 'M')
+  )
 }
 
 export def at-index [row column] {
