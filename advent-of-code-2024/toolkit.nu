@@ -79,6 +79,11 @@ export def "update readme" [] {
 ```
 (aoc calendar)
 ```
+# Why Nushell
+
+Nushell was placed on my radar in early 2023. My gut reaction was 'I hate powershell'. With some persistance from friends, the idea of Nushell was starting to take root. In the fall, it was time to put pen to paper and satiate my curiousity. Advent of Code 2023 \([source]\(https://github.com/NonlinearFruit/advent-of-code-2023)) was the testing ground. I learned a lot about Nushell and started using it day-to-day for scripting. The built-in testing framework was sunsetted at some point in 2024. That was a problem so I built nuUnit \([source]\(https://github.com/NonlinearFruit/nuUnit)).
+
+This year when Advent of Code 2024 came around, I evaluated several other languages. In a proper familiar language, maybe I could complete all 25 days... It also could be a great chance to learn Clojure or Go... Practicing Lua or Python would be fun... But it was hard to resist battle testing nuUnit and pushing Nushell to it's limits. So I buckled in for another rocky ride exploring what Nushel is capable of.
 
 # Prerequisites
 
@@ -94,6 +99,11 @@ vim ~/.adventofcode.session # https://github.com/scarvalhojr/aoc-cli?tab=readme-
 ## Nushell v0.100.0: Lessons Learned
 
 - On day 2, when piping into an `if`, could not call a defined function in the `else` clause. The error was something like `variable not defined` but the stacktrace was a couple functions higher than the `else` clause
+- nuUnit importing tests from a separate file doesn't work
+- `open ~/tilde/path/from/home` doesn't work directly any more, `path expand` is necessary first
+- Opening relative paths \(eg: `day-04-ceres-search/input`) is nuUnit tests is painful
+  - Same with importing modules, it is difficult to know what kind of relative path to use \(eg: working directory, calling file's directory)
+- A package manager of some sort is sorely needed. Being able to easily distribute and reuse code would be really helpful
 
 # Links
 
