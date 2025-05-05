@@ -1,0 +1,12 @@
+{
+ :paths ["spec/"]
+
+ :deps {
+        org.clojure/clojure {:mvn/version "1.12.0"}
+        speclj/speclj {:mvn/version "3.9.0"}
+        }
+
+ :aliases {
+           :spec {:main-opts ["-m" "speclj.main" "-c" "-t" "~slow"]}
+           }
+ }
