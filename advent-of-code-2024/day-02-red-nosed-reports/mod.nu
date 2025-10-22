@@ -1,89 +1,41 @@
 const input_file = "day-02-red-nosed-reports/input"
 
 export def "part 1" [] {
-  open $input_file
-  | lines
-  | each { split row ' ' | each { into int } }
-  | each {|report|
-    process_report $report
-    | {
-      result: $in
-      report: ($report | str join ' ')
-    }
-  }
-  | where result
+  parsed-input
+  | where (is_sorted)
+  | where (is_valid)
   | length
 }
 
 export def "part 2" [] {
-  open $input_file
-  | lines
-  | each { split row ' ' | each { into int } }
-  | each {|report|
-    hardened_process_report $report
-    | {
-      result: $in
-      report: ($report | str join ' ')
-    }
-  }
-  | where result
+  parsed-input
+  | where (is_tolerable)
   | length
 }
 
-def hardened_process_report [report] {
-  $report
-  | all_sublists_of_length_n_minus_1
-  | each {|list|
-    process_report $list
+def parsed-input [] {
+  open $input_file
+  | lines
+  | par-each { split words | into int } 
+}
+
+def is_sorted [] {
+  ($in | sort -r) == $in or ($in | sort) == $in
+}
+
+def is_valid [] {
+  $in
+  | window 2
+  | all {|w|
+    $w.0 - $w.1 | math abs | 0 < $in and $in < 4
   }
-  | sort --reverse
-  | first
 }
 
-def process_report [report] {
-  let next = $report | first
-  $report
-  | range 1..
-  | do {|it|
-    let down = $it | going_down $next
-    let up = $it | going_up $next
-    $up or $down
-  } $in
-}
-
-def going_up [previous] {
+def is_tolerable [] {
   let list = $in
-  if ($list | is-empty) { return true }
-  let next = $list | first
-  $list
-  | range 1..
-  | if $previous < $next and $next < $previous + 4 {
-    going_up $next
-  } else {
-    false
-  }
-}
-
-def going_down [previous] {
-  let list = $in
-  if ($list | is-empty) { return true }
-  let next = $list | first
-  $list
-  | range 1..
-  | if $previous > $next and $next > $previous - 4 {
-    going_down $next
-  } else {
-    false
-  }
-}
-
-def all_sublists_of_length_n_minus_1 [] {
-  do {|list|
-    $list
-    | length
-    | 1..$in
-    | each {|i|
-      ($list | take ($i - 1)) ++ ($list | skip $i)
-    }
-  } $in
+  0..<($list | length)
+  | each { |i| $list | reject $i }
+  | where (is_sorted)
+  | where (is_valid)
+  | is-not-empty
 }
