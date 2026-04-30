@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/PadFad" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/item_catechism_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q#: "
+            android:textAppearance="@style/MinorNumber" />
+
+        <TextView
+            android:id="@+id/item_catechism_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question"
+            android:textAppearance="@style/MinorHeader" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_catechism_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer"
+        android:textAppearance="@style/PlainText" />
+
+</LinearLayout>

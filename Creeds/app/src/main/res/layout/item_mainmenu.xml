@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
+    style="@style/PadFad">
+
+    <TextView
+        android:id="@+id/item_mainmenu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Creed"
+        android:textAppearance="@style/MajorHeader" />
+
+    <TextView
+        android:id="@+id/item_mainmenu_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year AD"
+        android:textAppearance="@style/MinorNumber" />
+
+
+</LinearLayout>
