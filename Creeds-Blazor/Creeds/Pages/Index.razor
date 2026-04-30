@@ -1,0 +1,38 @@
+﻿@page "/"
+@using Creeds.Data
+@inject IDatabase Database
+@inject NavigationManager NavigationManager
+
+<div align="center">
+    <RadzenImage Path="https://github.com/NonlinearFruit/Creeds.json/blob/master/metadata/feature_graphic.png?raw=true" Style="width:600px"/>
+    <br/>
+    <RadzenListBox
+        @bind-Value="@SelectedSummary"
+        Data="@Database.Creeds.OrderBy(c => c.Year)"
+        SelectedItemChanged="@OnSelectionChanged"
+        Style="width: 600px">
+        <Template>
+            <div style="display: flex; justify-content: space-between">
+                <span><b>@context.Title</b></span>
+                <span>??</span>
+            </div>
+            <div style="display: flex; justify-content: space-between">
+                <span>@context.Year</span>
+                <span>@context.SourceAttribution</span>
+            </div>
+        </Template>
+    </RadzenListBox>
+
+    <br/>
+    <RadzenLink Icon="code" Path="https://github.com/NonlinearFruit/Creeds-Blazor" Style="font-size: 20pt"/>
+    <RadzenLink Icon="android" Path="https://play.google.com/store/apps/details?id=com.nonlinearfruit.creeds" Style="font-size: 20pt"/>
+</div>
+@code {
+    public Summary SelectedSummary { get; set; }
+
+    private void OnSelectionChanged(object obj)
+    {
+        if (obj is Summary summary)
+            NavigationManager.NavigateTo(summary.Url);
+    }
+}

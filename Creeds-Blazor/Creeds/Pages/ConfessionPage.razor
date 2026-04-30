@@ -1,0 +1,53 @@
+﻿@page "/ConfessionPage/{ConfessionFile}"
+@using Creeds.Data
+@inject IDatabase Database
+
+@if (_summary == null)
+{
+    <h1>Oh no!</h1>
+    <p>
+        <em>We did not find a catechism called '@ConfessionFile'</em>
+    </p>
+}
+else
+{
+    <h1>@_summary.Title</h1>
+
+    <p>@_summary.SourceAttribution</p>
+
+    <p>@_summary.Year</p>
+    if (_document == null)
+    {
+        <p>We couldn't load @_summary.Title</p>
+    }
+    else
+    {
+        <ListView Items="@_document.Data">
+            <ItemTemplate>
+                <li value="@context.Chapter">
+                    <p style="white-space: pre">@context.Title</p>
+                    <ListView Items="@context.Sections">
+                        <ItemTemplate Context="section">
+                            <li value="@section.Section">
+                                <p style="white-space: pre">@section.Content</p>
+                            </li>
+                        </ItemTemplate>
+                    </ListView>
+                </li>
+            </ItemTemplate>
+        </ListView>
+    }
+}
+
+@code {
+    [Parameter]
+    public string ConfessionFile { get; set; }
+    private Summary _summary;
+    private Document<ICollection<ChapterItem>> _document;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _summary = Database.GetSummary(ConfessionFile);
+        _document = await Database.LoadDocumentAsync<ICollection<ChapterItem>>(_summary);
+    }
+}

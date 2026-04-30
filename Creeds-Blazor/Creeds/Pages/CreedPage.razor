@@ -1,0 +1,40 @@
+﻿@page "/CreedPage/{CreedFile}"
+@using Creeds.Data
+@inject IDatabase Database
+
+@if (_summary == null)
+{
+    <h1>Oh no!</h1>
+    <p>
+        <em>We did not find a creed called '@CreedFile'</em>
+    </p>
+}
+else
+{
+    <h1>@_summary.Title</h1>
+
+    <p>@_summary.SourceAttribution</p>
+
+    <p>@_summary.Year</p>
+    if (_document == null)
+    {
+        <p>We couldn't load @_summary.Title</p>
+    }
+    else
+    {
+        <p style="white-space: pre">@_document.Data.Content</p>
+    }
+}
+
+@code {
+    [Parameter]
+    public string CreedFile { get; set; }
+    private Summary _summary;
+    private Document<Creed> _document;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _summary = Database.GetSummary(CreedFile);
+        _document = await Database.LoadDocumentAsync<Creed>(_summary);
+    }
+}

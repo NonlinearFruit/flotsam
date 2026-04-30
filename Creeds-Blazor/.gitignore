@@ -1,0 +1,6 @@
+.idea/
+.svn/
+obj/
+bin/
+release/
+*.user

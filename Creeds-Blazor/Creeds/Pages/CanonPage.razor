@@ -1,0 +1,46 @@
+﻿@page "/CanonPage/{CanonFile}"
+@using Creeds.Data
+@inject IDatabase Database
+
+@if (_summary == null)
+{
+    <h1>Oh no!</h1>
+    <p>
+        <em>We did not find a catechism called '@CanonFile'</em>
+    </p>
+}
+else
+{
+    <h1>@_summary.Title</h1>
+
+    <p>@_summary.SourceAttribution</p>
+
+    <p>@_summary.Year</p>
+    if (_document == null)
+    {
+        <p>We couldn't load @_summary.Title</p>
+    }
+    else
+    {
+        <ListView Items="@_document.Data">
+            <ItemTemplate>
+                <li value="@context.Article">
+                    <p style="word-break: break-word; white-space: normal;">@context.Title<br>@context.Content</p>
+                </li>
+            </ItemTemplate>
+        </ListView>
+    }
+}
+
+@code {
+    [Parameter]
+    public string CanonFile { get; set; }
+    private Summary _summary;
+    private Document<ICollection<ArticleItem>> _document;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _summary = Database.GetSummary(CanonFile);
+        _document = await Database.LoadDocumentAsync<ICollection<ArticleItem>>(_summary);
+    }
+}
