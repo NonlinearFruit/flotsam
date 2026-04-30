@@ -1,0 +1,35 @@
+﻿<Window x:Class="Retrospector.Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Retrospector.Main"
+        mc:Ignorable="d"
+        Title="Retrospector" Height="800" Width="1300" d:DataContext="{local:MainWindowViewModel}">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Media" IsEnabled="False"/>
+                <MenuItem Header="_Preferences" IsEnabled="False"/>
+                <MenuItem Header="_Backup" IsEnabled="False"/>
+                <MenuItem Header="_Close" IsEnabled="False"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Cheatsheet" IsEnabled="False"/>
+                <MenuItem Header="_About" IsEnabled="False"/>
+            </MenuItem>
+        </Menu>
+        <TabControl DockPanel.Dock="Bottom" ItemsSource="{Binding Tabs}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </DockPanel>
+</Window>
