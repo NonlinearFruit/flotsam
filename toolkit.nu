@@ -35,3 +35,25 @@ export def absorb [clone_url] {
   print $"Merged into flotsam!"
   ^git remote remove $remote | complete | ignore
 }
+
+export def update-readme [] {
+  ls
+  | where type == dir
+  | get name
+  | each {|dir|
+    {
+      project: $dir
+      last-commit: (^git log --date=format:%Y-%m-%d --format=%ad $dir | lines | first)
+    }
+  }
+  | to md
+  | $"
+> n. _floating wreckage of a ship or its cargo_
+
+On the sea for dreams and aspirations, this repo contains the remains of the
+projects that didn't make it.
+
+($in)
+"
+  | save -f README.md
+}
