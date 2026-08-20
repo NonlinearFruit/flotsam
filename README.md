@@ -1,4 +1,8 @@
 
+<div align="center">
+  <img src="flotsam.png" alt="flotsam icon" width="400" height="400"/>
+</div>
+
 > n. _floating wreckage of a ship or its cargo_
 
 On the sea for dreams and aspirations, this repo contains the remains of the
